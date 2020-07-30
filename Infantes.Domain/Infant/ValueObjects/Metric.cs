@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Infantes.Domain.ValueObjects
 {
-    public class Metric
+    public class Metric : ValueObject
     {
+        public Metric() { }
+
         public Metric(decimal perimeter, decimal lenght, decimal weight)
         {
             Perimeter = perimeter;
@@ -13,24 +16,16 @@ namespace Infantes.Domain.ValueObjects
             Weight = weight;
         }
 
+        [Column(TypeName = "decimal(5,2)")]
         public decimal Perimeter { get; private set; }
         public decimal Length { get; private set; }
         public decimal Weight { get; private set; }
 
-        public void ChangePerimeter(decimal perimeter)
+        protected override IEnumerable<object> GetAtomicValues()
         {
-            Perimeter = perimeter;
+            yield return Perimeter;
+            yield return Length;
+            yield return Weight;
         }
-
-        public void ChangeLenght(decimal lenght)
-        {
-            Length = lenght;
-        }
-
-        public void ChangeWeight(decimal weight)
-        {
-            Weight = weight;
-        }
-
     }
 }

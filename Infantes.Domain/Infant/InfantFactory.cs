@@ -1,4 +1,5 @@
-﻿using Infantes.Domain.ValueObjects;
+﻿using Infantes.Domain.Enums;
+using Infantes.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -13,10 +14,11 @@ namespace Infantes.Domain
             DateTime birthdate,
             decimal perimeter,
             decimal lenght,
-            decimal weight)
+            decimal weight,
+            Sex sex)
         {
             var metric = new Metric(perimeter, lenght, weight);
-            return new Infant(name, birthdate, metric);
+            return new Infant(name, birthdate, metric, sex);
         }
     }
 }
